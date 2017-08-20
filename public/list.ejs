@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-<title><%= space %></title>
+<title>draw list</title>
 <script type="text/javascript" src="//code.jquery.com/jquery-2.2.4.min.js"></script>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
@@ -12,12 +12,24 @@
 <script>
 var space = "<%= space %>";
 
+var reloadsec = 0;
+var _reloadsec = <%= reloadsec %>;
+if( _reloadsec ){
+  reloadsec = _reloadsec;
+}
+
 $(function(){
+  $('#brand').html( space );
+
   $('.iframe').colorbox({
     iframe: true,
     width: "90%",
     height: "90%"
   });
+
+  if( reloadsec ){
+    setTimeout( "location.reload()", reloadsec * 1000 );
+  }
 });
 
 function delImages( delAll ){
@@ -52,7 +64,7 @@ img{
   <!-- //navi -->
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
-      <a class="navbar-brand" href="./admin"><%= space %></a>
+      <a class="navbar-brand" href="./admin" id="brand"></a>
       <button class="navbar-toggle" data-toggle="collapse" data-target=".target">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>

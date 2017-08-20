@@ -42,9 +42,11 @@ app.post( '/post', function( req, res ){
 });
 
 app.get( '/list', function( req, res ){
-  var space = req.query.space;
+  var space = req.query.space || settings.space;
+  var reloadsec = req.query.reloadsec || settings.reloadsec;
+
   var training_template = fs.readFileSync( __dirname + '/public/list.ejs', 'utf-8' );
-  var options = { space: space, error: '' };
+  var options = { space: space, reloadsec: reloadsec, error: '' };
   if( space ){
     fs.readdir( './public/imgs/', function( err, files ){
       if( err ){
@@ -93,16 +95,6 @@ app.delete( '/list', function( req, res ){
   res.end();
 });
 
-/*
-app.get( '/getimage', function( req, res ){
-  var image_id = req.query.id;
-  //var image_url = "//" + settings.cloudant_username + ":" + settings.cloudant_password + "@" + settings.cloudant_username + ".cloudant.com/" + settings.cloudant_db + "/" + image_id + "/image";
-  spendb.attachment.get( image_id, "image", function( err1, body1 ){
-    res.contentType( 'image/png' );
-    res.end( body1, 'binary' );
-  });
-});
-*/
 
 app.listen( appEnv.port );
 console.log( "server stating on " + appEnv.port + " ..." );

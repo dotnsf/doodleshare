@@ -1,6 +1,6 @@
 var waiting = false;
 var waitms = 2000;
-var space = '';
+var space = 'public';
 $(function(){
   var pair = location.search.substring( 1 ).split( '&' );
   for( var i = 0; pair[i]; i ++ ){
